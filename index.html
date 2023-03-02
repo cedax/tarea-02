@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Conjuntos e Intersecciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container mt-5 text-center">
+        <h1>Conjuntos e Intersecciones</h1>
+        <form class="mt-4">
+            <label for="input-a">Arreglo A:</label>
+            <input type="text" id="input-a" name="input-a" value="1,2,3,4,5,6,8"><br><br>
+
+            <label for="input-b">Arreglo B:</label>
+            <input type="text" id="input-b" name="input-b" value="2,4,6,7"><br><br>
+
+            <input type="submit" value="Calcular">
+        </form>
+
+        <div id="resultado" class="mt-4"></div>
+    </div>
+
+    <script>
+      const form = document.querySelector('form');
+      const resultadoDiv = document.querySelector('#resultado');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const inputA = document.querySelector('#input-a').value;
+        const inputB = document.querySelector('#input-b').value;
+
+        const A = inputA.split(',').map(Number);
+        const B = inputB.split(',').map(Number);
+
+        const conjunto = [...new Set([...A, ...B])];
+
+        const interseccion = A.filter(x => B.includes(x));
+
+        resultadoDiv.innerHTML = `
+          <p>Unión: [${conjunto}]</p>
+          <p>Intersección: [${interseccion}]</p>
+          <p>Para calcular la unión de los conjuntos, se utiliza el operador spread de ES6 para unir los dos arreglos en uno solo. Luego, se utilizan los sets de JavaScript para eliminar duplicados y obtener el conjunto unión.</p>
+          <p>Para calcular la intersección, se utiliza el método filter() de JavaScript para crear un nuevo arreglo que contenga solo los elementos que se encuentran en ambos arreglos A y B.</p>
+        `;
+      });
+    </script>
+  </body>
+</html>
